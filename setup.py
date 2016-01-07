@@ -1,27 +1,30 @@
-from setuptools import setup, find_packages
+#!/usr/bin/env python
+
+from setuptools import setup
 from setuptools.command.test import test as TestCommand
 import sys
+
 
 class Tox(TestCommand):
     def finalize_options(self):
         TestCommand.finalize_options(self)
         self.test_args = []
         self.test_suite = True
+
     def run_tests(self):
-        #import here, cause outside the eggs aren't loaded
+        # import here, cause outside the eggs aren't loaded
         import tox
         errno = tox.cmdline(self.test_args)
         sys.exit(errno)
 
 setup(
     name='py-moneyed',
-    packages=find_packages('src'),
-    package_dir={'': 'src'},
-    version='0.5.0+fyndiq',
+    packages=['moneyed'],
+    version='0.6.0',
     description='Provides Currency and Money classes for use in your Python code.',
-    author='Kai',
-    author_email='k@limist.com',
-    url='http://github.com/saabeilin/py-moneyed',
+    author='Fyndiq developers',
+    author_email='sd.all@fyndiq.com',
+    url='http://github.com/fyndiq/py-moneyed',
     download_url='',
     keywords="money currency class abstraction",
     license='BSD',
@@ -45,4 +48,4 @@ setup(
     tests_require=['tox>=1.6.0', 'pytest>=2.3.0'],
     cmdclass={'test': Tox},
     include_package_data=True,
-    )
+)

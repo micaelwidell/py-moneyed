@@ -15,7 +15,7 @@ class CurrencyFormatter(object):
     def add_sign_definition(self, locale, currency, prefix='', suffix=''):
         locale = locale.upper()
         currency_code = currency.code.upper()
-        if not locale in self.sign_definitions:
+        if locale not in self.sign_definitions:
             self.sign_definitions[locale] = {}
         self.sign_definitions[locale][currency_code] = (prefix, suffix)
 
@@ -129,44 +129,50 @@ format_money = _FORMATTER.format
 _sign = _FORMATTER.add_sign_definition
 _format = _FORMATTER.add_formatting_definition
 
-## FORMATTING RULES
+# FORMATTING RULES
 
 _format(DEFAULT, group_size=3, group_separator=",", decimal_point=".",
-                 positive_sign="", trailing_positive_sign="",
-                 negative_sign="-", trailing_negative_sign="",
-                 rounding_method=ROUND_HALF_EVEN)
+        positive_sign="", trailing_positive_sign="",
+        negative_sign="-", trailing_negative_sign="",
+        rounding_method=ROUND_HALF_EVEN)
 
 _format("en_US", group_size=3, group_separator=",", decimal_point=".",
-                 positive_sign="", trailing_positive_sign="",
-                 negative_sign="-", trailing_negative_sign="",
-                 rounding_method=ROUND_HALF_EVEN)
-                 
+        positive_sign="", trailing_positive_sign="",
+        negative_sign="-", trailing_negative_sign="",
+        rounding_method=ROUND_HALF_EVEN)
+
 _format("de_DE", group_size=3, group_separator=" ", decimal_point=",",
-                 positive_sign="", trailing_positive_sign="",
-                 negative_sign="-", trailing_negative_sign="",
-                 rounding_method=ROUND_HALF_EVEN)
-                 
+        positive_sign="", trailing_positive_sign="",
+        negative_sign="-", trailing_negative_sign="",
+        rounding_method=ROUND_HALF_EVEN)
+
 _format("de_AT", group_size=3, group_separator=" ", decimal_point=",",
-                 positive_sign="", trailing_positive_sign="",
-                 negative_sign="-", trailing_negative_sign="",
-                 rounding_method=ROUND_HALF_EVEN)
-                 
+        positive_sign="", trailing_positive_sign="",
+        negative_sign="-", trailing_negative_sign="",
+        rounding_method=ROUND_HALF_EVEN)
+
 _format("de_CH", group_size=3, group_separator=" ", decimal_point=".",
-                 positive_sign="", trailing_positive_sign="",
-                 negative_sign="-", trailing_negative_sign="",
-                 rounding_method=ROUND_HALF_EVEN)
+        positive_sign="", trailing_positive_sign="",
+        negative_sign="-", trailing_negative_sign="",
+        rounding_method=ROUND_HALF_EVEN)
 
 _format("sv_SE", group_size=3, group_separator=" ", decimal_point=",",
-                 positive_sign="", trailing_positive_sign="",
-                 negative_sign="-", trailing_negative_sign="",
-                 rounding_method=ROUND_HALF_EVEN)
+        positive_sign="", trailing_positive_sign="",
+        negative_sign="-", trailing_negative_sign="",
+        rounding_method=ROUND_HALF_EVEN)
 
 _format("pl_PL", group_size=3, group_separator=" ", decimal_point=",",
-                 positive_sign="", trailing_positive_sign="",
-                 negative_sign="-", trailing_negative_sign="",
-                 rounding_method=ROUND_HALF_EVEN)
+        positive_sign="", trailing_positive_sign="",
+        negative_sign="-", trailing_negative_sign="",
+        rounding_method=ROUND_HALF_EVEN)
 
-## CURRENCY SIGNS
+_format("en_GB", group_size=3, group_separator=",", decimal_point=".",
+        positive_sign="", trailing_positive_sign="",
+        negative_sign="-", trailing_negative_sign="",
+        rounding_method=ROUND_HALF_EVEN)
+
+
+# CURRENCY SIGNS
 # Default currency signs. These can be overridden for locales where
 # foreign or local currency signs for one reason or another differ
 # from the norm.
@@ -229,7 +235,7 @@ _sign(DEFAULT, moneyed.GTQ, prefix='Q')
 _sign(DEFAULT, moneyed.GYD, prefix='G$')
 _sign(DEFAULT, moneyed.HKD, prefix='HK$')
 _sign(DEFAULT, moneyed.HNL, prefix='L')
-_sign(DEFAULT, moneyed.HRK, suffix='kn')
+_sign(DEFAULT, moneyed.HRK, suffix=' kn')
 _sign(DEFAULT, moneyed.HTG, prefix='G')
 _sign(DEFAULT, moneyed.HUF, prefix='Ft')
 _sign(DEFAULT, moneyed.IDR, prefix='Rp')
@@ -285,7 +291,7 @@ _sign(DEFAULT, moneyed.PKR, prefix='₨')
 _sign(DEFAULT, moneyed.PLN, suffix=' zł')
 _sign(DEFAULT, moneyed.PYG, prefix='₲')
 _sign(DEFAULT, moneyed.QAR, prefix='ر.ق')
-_sign(DEFAULT, moneyed.RSD, prefix='дин')
+_sign(DEFAULT, moneyed.RSD, prefix='RSD ')
 _sign(DEFAULT, moneyed.RUB, prefix='руб.')
 _sign(DEFAULT, moneyed.RWF, prefix='FRw')
 _sign(DEFAULT, moneyed.SAR, prefix='ر.س')
@@ -304,7 +310,7 @@ _sign(DEFAULT, moneyed.SZL, prefix='E')
 _sign(DEFAULT, moneyed.THB, prefix='฿')
 _sign(DEFAULT, moneyed.TND, prefix='د.ت')
 _sign(DEFAULT, moneyed.TOP, prefix='TOP$')
-_sign(DEFAULT, moneyed.TRY, prefix='TL')
+_sign(DEFAULT, moneyed.TRY, prefix='₺')
 _sign(DEFAULT, moneyed.TTD, prefix='TT$')
 _sign(DEFAULT, moneyed.TVD, prefix='$T')
 _sign(DEFAULT, moneyed.TWD, prefix='NT$')
@@ -322,12 +328,24 @@ _sign(DEFAULT, moneyed.XDR, prefix='SDR')
 _sign(DEFAULT, moneyed.XOF, prefix='CFA')
 _sign(DEFAULT, moneyed.ZAR, prefix='R')
 _sign(DEFAULT, moneyed.ZMK, prefix='ZK')
+_sign(DEFAULT, moneyed.ZMW, prefix='ZK')
 _sign(DEFAULT, moneyed.ZWL, prefix='Z$')
 
 _sign('en_US', moneyed.USD, prefix='$')
-_sign('en_UK', moneyed.GBP, prefix='£')
+_sign('en_GB', moneyed.GBP, prefix='£')
 _sign('sv_SE', moneyed.SEK, prefix=' kr')
 _sign('pl_PL', moneyed.PLN, suffix=' zł')
 _sign('de_DE', moneyed.EUR, suffix=' €')
 _sign('de_AT', moneyed.EUR, suffix=' €')
 _sign('de_CH', moneyed.CHF, prefix='Fr.')
+
+# Adding translations for missing currencies
+_sign('en_US', moneyed.KWD, prefix='KD')
+_sign('en_US', moneyed.BHD, prefix='BD')
+_sign('en_US', moneyed.SAR, prefix='SR')
+_sign('en_US', moneyed.DZD, prefix='DA')
+_sign('en_US', moneyed.LYD, prefix='LD')
+_sign('en_US', moneyed.TND, prefix='DT')
+_sign('en_US', moneyed.AED, prefix='Dhs')
+_sign('en_US', moneyed.EGP, prefix='L.E.')
+_sign('en_US', moneyed.QAR, prefix='QR')
