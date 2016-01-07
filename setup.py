@@ -19,8 +19,6 @@ class Tox(TestCommand):
 
 setup(
     name='py-moneyed',
-    packages=find_packages('src'),
-    package_dir={'': 'src'},
     packages=['moneyed'],
     version='0.6.0',
     description='Provides Currency and Money classes for use in your Python code.',
